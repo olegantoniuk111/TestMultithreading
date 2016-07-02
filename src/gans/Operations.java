@@ -9,9 +9,10 @@ import javax.naming.InsufficientResourcesException;
 
 public class Operations {
 
-	public static void main(String[] args) {
-		final Account gans = new Account(1000, "GansAccount");
-		final Account kate = new Account(2000, "KateAccount");
+	public static void main(String[] args) throws InterruptedException {
+		final Account gans = new Account("GansAccount", 2000);
+		final Account kate = new Account("KateAccount", 1000);
+		
 
 //		new Thread(new Runnable() {
 //
@@ -30,9 +31,11 @@ public class Operations {
 		
 			ExecutorService service = Executors.newFixedThreadPool(3);
 			for (int i = 0; i < 10; i++) {
-				service.submit(new Transfer(gans, kate, new Random().nextInt(10)));
+				service.submit(new Transfer(gans, kate, new Random().nextInt(250), i) );
 			}
 			service.shutdown();
+			//service.awaitTermination(10, TimeUnit.SECONDS);
+			
 			
 		}
 	

@@ -5,6 +5,15 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Account {
+	public Account(String name, int balance) {
+		super();
+		this.name = name;
+		this.balance = balance;
+		this.lock = new ReentrantLock();
+		this.failCounter = new AtomicInteger(0);
+		System.out.println( this.name +"account initialized with balance" + balance + "\n");
+	}
+
 	private String name;
 	private int balance;
 	private Lock lock;
@@ -30,13 +39,7 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public Account(int initAccount,String name) {
-		lock = new ReentrantLock();
-		this.name = name;
-		this.balance = initAccount;
-		failCounter = new AtomicInteger(0);
-		System.out.println( this.name +"account initialized with balance" + initAccount + "\n");
-	}
+	
 
 	public void withdraw(int amount) {
 		balance = balance - amount;
@@ -50,7 +53,7 @@ public class Account {
 
 	public void incFailCounter() {
 		this.failCounter.incrementAndGet();
-		System.out.println(this.name + "  can't take lock");
+		System.out.println(this.name+"failcounter incremanted and =="+this.failCounter);
 	}
 
 	public String getName() {

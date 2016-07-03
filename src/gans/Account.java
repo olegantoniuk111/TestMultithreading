@@ -1,5 +1,6 @@
 package gans;
 
+import java.util.concurrent.Semaphore;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -13,7 +14,7 @@ public class Account {
 		this.failCounter = new AtomicInteger(0);
 		System.out.println( this.name +"account initialized with balance" + balance + "\n");
 	}
-
+	
 	private String name;
 	private int balance;
 	private Lock lock;
